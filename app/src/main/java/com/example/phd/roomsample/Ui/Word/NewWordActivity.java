@@ -1,4 +1,4 @@
-package com.example.phd.roomsample;
+package com.example.phd.roomsample.Ui.Word;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +7,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.phd.roomsample.R;
 
 public class NewWordActivity extends AppCompatActivity {
 

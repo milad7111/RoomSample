@@ -1,4 +1,4 @@
-package com.example.phd.roomsample;
+package com.example.phd.roomsample.Room.Tables;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

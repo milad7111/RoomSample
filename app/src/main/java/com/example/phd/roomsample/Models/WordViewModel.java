@@ -1,9 +1,11 @@
-package com.example.phd.roomsample;
+package com.example.phd.roomsample.Models;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
+
+import com.example.phd.roomsample.Repositories.WordRepository;
+import com.example.phd.roomsample.Room.Tables.Word;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class WordViewModel extends AndroidViewModel {
         mAllWords = mRepository.getAllWords();
     }
 
-    LiveData<List<Word>> getAllWords() {
+    public LiveData<List<Word>> getAllWords() {
         return mAllWords;
     }
 

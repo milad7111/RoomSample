@@ -1,9 +1,11 @@
-package com.example.phd.roomsample;
+package com.example.phd.roomsample.Room.Daos;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
+
+import com.example.phd.roomsample.Room.Tables.Word;
 
 import java.util.List;
 

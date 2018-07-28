@@ -1,4 +1,4 @@
-package com.example.phd.roomsample;
+package com.example.phd.roomsample.Ui.Home;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.phd.roomsample.R;
+import com.example.phd.roomsample.Room.Tables.Word;
 
 import java.util.List;
 
