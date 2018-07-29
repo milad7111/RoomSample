@@ -11,12 +11,14 @@ import android.support.annotation.NonNull;
 import com.example.phd.roomsample.Room.Daos.WordDao;
 import com.example.phd.roomsample.Room.Tables.Word;
 
-@Database(entities = {Word.class}, version = 1)
+@Database(entities = {Word.class}, version = 1, exportSchema = false)
 public abstract class WordRoomDatabase extends RoomDatabase {
 
+    //region declare Objects
     private static WordRoomDatabase INSTANCE;
 
     public abstract WordDao wordDao();
+    //endregion declare Objects
 
     public static WordRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -49,7 +51,7 @@ public abstract class WordRoomDatabase extends RoomDatabase {
 
     private static class PopulateDbAsync extends AsyncTask<Void, Void, Void> {
 
-        private final WordDao mDao;
+        private WordDao mDao;
 
         PopulateDbAsync(WordRoomDatabase db) {
             mDao = db.wordDao();

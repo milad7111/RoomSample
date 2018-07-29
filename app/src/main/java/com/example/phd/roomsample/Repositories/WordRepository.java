@@ -12,8 +12,13 @@ import java.util.List;
 
 public class WordRepository {
 
+    //region Declare Objects
     private WordDao mWordDao;
+    //endregion Declare Objects
+
+    //region Declare Values
     private LiveData<List<Word>> mAllWords;
+    //endregion Declare Values
 
     public WordRepository(Application application) {
         WordRoomDatabase db = WordRoomDatabase.getDatabase(application);
@@ -25,7 +30,7 @@ public class WordRepository {
         return mAllWords;
     }
 
-    public void insert (Word word) {
+    public void insert(Word word) {
         new insertAsyncTask(mWordDao).execute(word);
     }
 

@@ -15,11 +15,11 @@ import java.util.List;
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
     class WordViewHolder extends RecyclerView.ViewHolder {
-        private final TextView wordItemView;
+        TextView wordItemView;
 
         private WordViewHolder(View itemView) {
             super(itemView);
-            wordItemView = itemView.findViewById(R.id.textView);
+            wordItemView = itemView.findViewById(R.id.recyclerview__item_txv_word);
         }
     }
 

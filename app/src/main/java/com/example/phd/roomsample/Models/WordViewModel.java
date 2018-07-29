@@ -10,9 +10,14 @@ import com.example.phd.roomsample.Room.Tables.Word;
 import java.util.List;
 
 public class WordViewModel extends AndroidViewModel {
-    private WordRepository mRepository;
 
+    //region declare Objects
+    private WordRepository mRepository;
+    //region declare Objects
+
+    //region declare Values
     private LiveData<List<Word>> mAllWords;
+    //region declare Values
 
     public WordViewModel(Application application) {
         super(application);

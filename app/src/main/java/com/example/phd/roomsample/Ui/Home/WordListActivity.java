@@ -1,54 +1,61 @@
 package com.example.phd.roomsample.Ui.Home;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import android.annotation.SuppressLint;
+import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Toast;
 
-import com.example.phd.roomsample.Models.WordViewModel;
+import com.example.phd.roomsample.Base.BaseActivity;
 import com.example.phd.roomsample.R;
+import com.example.phd.roomsample.Room.Daos.WordDao;
 import com.example.phd.roomsample.Room.Tables.Word;
 import com.example.phd.roomsample.Ui.Word.NewWordActivity;
 
 import java.util.List;
 
-public class WordListActivity extends AppCompatActivity implements View.OnClickListener {
+import static com.example.phd.roomsample.Utils.ViewHelper.createSnackBar;
 
-    private WordViewModel mWordViewModel;
+/**
+ * Displays WordList View
+ */
+public class WordListActivity extends BaseActivity implements WordListContract.MvpView, View.OnClickListener {
+
+    //region Declare Objects
+    private WordListPresenter mWordListPresenter;
+    //endregion Declare Objects
+
+    //region Declare Views
+    private RecyclerView recyclerView;
+    //endregion Declare Views
+
+    //region Declare Values
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
+    //endregion Declare Values
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //region Declare RecyclerView and Initialize it
-        RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        final WordListAdapter adapter = new WordListAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        //endregion Declare RecyclerView and Initialize it
+        //region Initialize Presenter
+        mWordListPresenter = new WordListPresenter(this);
+        mWordListPresenter.getAllWords();
+        //endregion Initialize Presenter
 
         //region Initialize Views
-        findViewById(R.id.activity_main_fab_add_word).setOnClickListener(this);
+        recyclerView = findViewById(R.id.activity_main_rclv_word_list);
         //endregion Initialize Views
 
-        mWordViewModel = ViewModelProviders.of(this).get(WordViewModel.class);
-        mWordViewModel.getAllWords().observe(this, new Observer<List<Word>>() {
-            @Override
-            public void onChanged(@Nullable final List<Word> words) {
-                // Update the cached copy of the words in the adapter.
-                adapter.setWords(words);
-            }
-        });
+        //region Set Events
+        findViewById(R.id.activity_main_fab_add_word).setOnClickListener(this);
+        //endregion Set Events
     }
 
+    @SuppressLint("DefaultLocale")
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -56,10 +63,10 @@ public class WordListActivity extends AppCompatActivity implements View.OnClickL
             case NEW_WORD_ACTIVITY_REQUEST_CODE:
                 switch (resultCode) {
                     case RESULT_OK:
-                        mWordViewModel.insert(new Word(data.getStringExtra(NewWordActivity.EXTRA_REPLY)));
+                        createSnackBar(recyclerView.getRootView(), String.format("%d  %s", data.getIntExtra(NewWordActivity.EXTRA_REPLY, 0), getString(R.string.how_many_words_added)), Snackbar.LENGTH_SHORT).show();
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(), R.string.empty_not_saved, Toast.LENGTH_LONG).show();
+                        createSnackBar(recyclerView.getRootView(), getString(R.string.no_word_add), Snackbar.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -72,5 +79,13 @@ public class WordListActivity extends AppCompatActivity implements View.OnClickL
                 startActivityForResult(new Intent(WordListActivity.this, NewWordActivity.class), NEW_WORD_ACTIVITY_REQUEST_CODE);
                 break;
         }
+    }
+
+    @Override
+    public void showAllWords(List<Word> _mAllWords) {
+        WordListAdapter adapter = new WordListAdapter(this);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter.setWords(_mAllWords);
     }
 }
