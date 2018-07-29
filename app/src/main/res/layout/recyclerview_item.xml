@@ -4,15 +4,12 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="4dp"
-    android:orientation="vertical">
+    android:layout_marginTop="4dp">
 
     <TextView
-        android:id="@+id/recyclerview__item_txv_word"
+        android:id="@+id/recyclerview_item_txv_word"
         style="@style/word_title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:color/holo_green_light"
-        android:padding="2dp" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

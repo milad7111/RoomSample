@@ -1,8 +1,7 @@
-package com.example.phd.roomsample.Ui.Home;
+package com.example.phd.roomsample.Ui.WordList;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
-import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.example.phd.roomsample.Room.Tables.Word;
@@ -23,5 +22,6 @@ public interface WordListContract {
 
     interface Presenter {
         void getAllWords();
+        void delete(Word _mWord);
     }
 }

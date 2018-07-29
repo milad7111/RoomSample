@@ -1,6 +1,5 @@
-package com.example.phd.roomsample.Ui.Home;
+package com.example.phd.roomsample.Ui.WordList;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
@@ -34,5 +33,10 @@ public class WordListPresenter implements WordListContract.Presenter {
                 mMvpView.showAllWords(words);
             }
         });
+    }
+
+    @Override
+    public void delete(Word _mWord) {
+        mWordViewModel.delete(_mWord);
     }
 }

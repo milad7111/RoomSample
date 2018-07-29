@@ -11,13 +11,13 @@ import java.util.List;
 
 public class WordViewModel extends AndroidViewModel {
 
-    //region declare Objects
+    //region Declare Objects
     private WordRepository mRepository;
-    //region declare Objects
+    //endregion Declare Objects
 
-    //region declare Values
+    //region Declare Values
     private LiveData<List<Word>> mAllWords;
-    //region declare Values
+    //endregion Declare Values
 
     public WordViewModel(Application application) {
         super(application);
@@ -31,5 +31,9 @@ public class WordViewModel extends AndroidViewModel {
 
     public void insert(Word word) {
         mRepository.insert(word);
+    }
+
+    public void delete(Word word) {
+        mRepository.delete(word);
     }
 }

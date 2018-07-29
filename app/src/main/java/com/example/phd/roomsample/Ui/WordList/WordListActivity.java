@@ -1,17 +1,16 @@
-package com.example.phd.roomsample.Ui.Home;
+package com.example.phd.roomsample.Ui.WordList;
 
 import android.annotation.SuppressLint;
-import android.arch.lifecycle.LiveData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
 import com.example.phd.roomsample.Base.BaseActivity;
 import com.example.phd.roomsample.R;
-import com.example.phd.roomsample.Room.Daos.WordDao;
 import com.example.phd.roomsample.Room.Tables.Word;
 import com.example.phd.roomsample.Ui.Word.NewWordActivity;
 
@@ -26,6 +25,7 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
 
     //region Declare Objects
     private WordListPresenter mWordListPresenter;
+    private WordListAdapter mWordListAdapter;
     //endregion Declare Objects
 
     //region Declare Views
@@ -48,6 +48,14 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
 
         //region Initialize Views
         recyclerView = findViewById(R.id.activity_main_rclv_word_list);
+
+        mWordListAdapter = new WordListAdapter(this, mWordListPresenter);
+        recyclerView.setAdapter(mWordListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        ItemTouchHelper.Callback callback = new WordListTouchHelper(mWordListAdapter);
+        ItemTouchHelper helper = new ItemTouchHelper(callback);
+        helper.attachToRecyclerView(recyclerView);
         //endregion Initialize Views
 
         //region Set Events
@@ -83,9 +91,6 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
 
     @Override
     public void showAllWords(List<Word> _mAllWords) {
-        WordListAdapter adapter = new WordListAdapter(this);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter.setWords(_mAllWords);
+        mWordListAdapter.setWords(_mAllWords);
     }
 }
