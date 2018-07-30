@@ -17,7 +17,7 @@ public class NewWordActivity extends BaseActivity implements WordContract.MvpVie
 
     //region Declare Objects
     private NewWordPresenter mWordPresenter;
-    //region Declare Objects
+    //endregion Declare Objects
 
     //region Declare Views
     private EditText _activity_new_word_edtx_word;
@@ -57,7 +57,7 @@ public class NewWordActivity extends BaseActivity implements WordContract.MvpVie
                 if (TextUtils.isEmpty(_activity_new_word_edtx_word.getText())) {
                     checkResponse(0);
                 } else {
-                    mWordPresenter.insertNewWord(new Word(_activity_new_word_edtx_word.getText().toString()));
+                    mWordPresenter.insertWord(new Word(_activity_new_word_edtx_word.getText().toString()));
                     _activity_new_word_edtx_word.setText(null);
                     mCount++;
                 }

@@ -1,11 +1,13 @@
 package com.example.phd.roomsample.Ui.WordList;
 
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.phd.roomsample.Models.WordViewModel;
+import com.example.phd.roomsample.Room.Tables.Definition;
 import com.example.phd.roomsample.Room.Tables.Word;
 
 import java.util.List;
@@ -36,7 +38,19 @@ public class WordListPresenter implements WordListContract.Presenter {
     }
 
     @Override
-    public void delete(Word _mWord) {
-        mWordViewModel.delete(_mWord);
+    public void deleteWord(Word _mWord) {
+        mWordViewModel.deleteWord(_mWord);
+    }
+
+    @Override
+    public void getDefinitionsByWord(Word _mWord) {
+        LiveData<List<Definition>> mDefinitionsByWord = mWordViewModel.getDefinitionsByWord(_mWord);
+
+        mDefinitionsByWord.observe(mMvpView, new Observer<List<Definition>>() {
+            @Override
+            public void onChanged(@Nullable List<Definition> definitions) {
+                mMvpView.showDefinitionsByWord(definitions);
+            }
+        });
     }
 }

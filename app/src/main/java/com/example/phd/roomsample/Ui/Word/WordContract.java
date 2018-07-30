@@ -11,6 +11,6 @@ public interface WordContract {
     }
 
     interface Presenter {
-        void insertNewWord(Word _mWord);
+        void insertWord(Word _mWord);
     }
 }

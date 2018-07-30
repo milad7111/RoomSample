@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.example.phd.roomsample.Base.BaseActivity;
 import com.example.phd.roomsample.R;
+import com.example.phd.roomsample.Room.Tables.Definition;
 import com.example.phd.roomsample.Room.Tables.Word;
 import com.example.phd.roomsample.Ui.Word.NewWordActivity;
 
@@ -92,5 +93,20 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
     @Override
     public void showAllWords(List<Word> _mAllWords) {
         mWordListAdapter.setWords(_mAllWords);
+    }
+
+    public void showDefinitionsByWord(List<Definition> _mDefinitionsByWord) {
+        StringBuilder mDefinitions = new StringBuilder();
+        for (Definition definition : _mDefinitionsByWord) {
+            mDefinitions.append(definition.getDefinition()).append(" : ").append(definition.getLanguage()).append("\n");
+        }
+
+        final Snackbar mSnackBar = createSnackBar(recyclerView.getRootView(), mDefinitions.toString(), Snackbar.LENGTH_INDEFINITE);
+        mSnackBar.setAction("OK", new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mSnackBar.dismiss();
+            }
+        }).show();
     }
 }

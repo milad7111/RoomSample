@@ -3,10 +3,13 @@ package com.example.phd.roomsample.Ui.WordList;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.phd.roomsample.R;
 import com.example.phd.roomsample.Room.Tables.Word;
@@ -15,9 +18,17 @@ import java.util.List;
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
+    //region Declare Objects
     private WordListPresenter mWordListPresenter;
+    //endregion Declare Objects
+
+    //region Declare Views
     private final LayoutInflater mInflater;
-    private List<Word> mWords; // Cached copy of words
+    //endregion Declare Views
+
+    //region Declare Values
+    private List<Word> mWords;
+    //endregion Declare Values
 
     class WordViewHolder extends RecyclerView.ViewHolder {
         TextView _recyclerview_item_txv_word;
@@ -28,8 +39,8 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         }
     }
 
-    WordListAdapter(Context context, WordListPresenter _mWordListPresenter) {
-        this.mInflater = LayoutInflater.from(context);
+    WordListAdapter(Context _mContext, WordListPresenter _mWordListPresenter) {
+        this.mInflater = LayoutInflater.from(_mContext);
         this.mWordListPresenter = _mWordListPresenter;
     }
 
@@ -40,7 +51,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     }
 
     @Override
-    public void onBindViewHolder(WordViewHolder holder, int position) {
+    public void onBindViewHolder(WordViewHolder holder, final int position) {
         if (mWords != null) {
             Word current = mWords.get(position);
             holder._recyclerview_item_txv_word.setText(current.getWord());
@@ -48,6 +59,13 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
             // Covers the case of data not being ready yet.
             holder._recyclerview_item_txv_word.setText("No Word");
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mWordListPresenter.getDefinitionsByWord(mWords.get(position));
+            }
+        });
     }
 
     void setWords(List<Word> words) {
@@ -65,6 +83,6 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     }
 
     public void remove(int position) {
-        mWordListPresenter.delete(mWords.get(position));
+        mWordListPresenter.deleteWord(mWords.get(position));
     }
 }

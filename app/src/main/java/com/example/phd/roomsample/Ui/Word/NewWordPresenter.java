@@ -22,8 +22,8 @@ public class NewWordPresenter implements WordContract.Presenter {
     }
 
     @Override
-    public void insertNewWord(Word _mWord) {
-        mWordViewModel.insert(_mWord);
+    public void insertWord(Word _mWord) {
+        mWordViewModel.insertWord(_mWord);
         mMvpView.checkResponse(1);
     }
 }

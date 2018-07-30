@@ -4,6 +4,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.NonNull;
 
+import com.example.phd.roomsample.Room.Tables.Definition;
 import com.example.phd.roomsample.Room.Tables.Word;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 public interface WordListContract {
     interface MvpView extends LifecycleOwner {
         void showAllWords(List<Word> _mAllWords);
+        void showDefinitionsByWord(List<Definition> _mDefinitions);
 
         @NonNull
         @Override
@@ -22,6 +24,7 @@ public interface WordListContract {
 
     interface Presenter {
         void getAllWords();
-        void delete(Word _mWord);
+        void deleteWord(Word _mWord);
+        void getDefinitionsByWord(Word _mWord);
     }
 }

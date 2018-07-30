@@ -5,29 +5,39 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
+import java.util.UUID;
+
 @Entity(tableName = "wordTable")
 public class Word {
 
-    @PrimaryKey(autoGenerate = true)
-    private int id;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "id")
+    private String mId;
 
     @NonNull
     @ColumnInfo(name = "word")
     private String mWord;
 
-    public Word(String word) {
-        this.mWord = word;
+    public Word(String mWord) {
+        this.mId = UUID.randomUUID().toString();
+        this.mWord = mWord;
     }
 
+    public String getId() {
+        return mId;
+    }
+
+    public void setId(String mId) {
+        this.mId = mId;
+    }
+
+    @NonNull
     public String getWord() {
-        return this.mWord;
+        return mWord;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setWord(@NonNull String mWord) {
+        this.mWord = mWord;
     }
 }
