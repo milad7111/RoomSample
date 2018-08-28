@@ -16,7 +16,7 @@ public class NewWordPresenter implements WordContract.Presenter {
     private WordContract.MvpView mMvpView;
     //endregion Declare Objects
 
-    NewWordPresenter(WordContract.MvpView _mMvpView) {
+    public NewWordPresenter(WordContract.MvpView _mMvpView) {
         this.mMvpView = _mMvpView;
         this.mWordViewModel = ViewModelProviders.of((FragmentActivity) _mMvpView).get(WordViewModel.class);
     }

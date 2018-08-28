@@ -19,6 +19,10 @@ public class Word {
     @ColumnInfo(name = "word")
     private String mWord;
 
+    public Word() {
+        this.mId = UUID.randomUUID().toString();
+    }
+
     public Word(String mWord) {
         this.mId = UUID.randomUUID().toString();
         this.mWord = mWord;
