@@ -4,11 +4,12 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
+import com.example.phd.roomsample.executer.CustomThreadPoolExecutor;
+import com.example.phd.roomsample.room._main.WordRoomDatabase;
 import com.example.phd.roomsample.room.daos.DefinitionDao;
 import com.example.phd.roomsample.room.daos.WordDao;
 import com.example.phd.roomsample.room.tables.Definition;
 import com.example.phd.roomsample.room.tables.Word;
-import com.example.phd.roomsample.room._main.WordRoomDatabase;
 
 import java.util.List;
 
@@ -35,11 +36,24 @@ public class WordRepository {
     }
 
     public void insertWord(Word word) {
-        new insertWordAsyncTask(mWordDao).execute(word);
+        CustomThreadPoolExecutor.getInstance().execute(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        new insertWordAsyncTask(mWordDao).execute(word);
+                    }
+                });
     }
 
     public void deleteWord(Word word) {
-        new deleteWordAsyncTask(mWordDao).execute(word);
+        CustomThreadPoolExecutor.getInstance().execute(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        new deleteWordAsyncTask(mWordDao).execute(word);
+                    }
+                }
+        );
     }
 
     private static class insertWordAsyncTask extends AsyncTask<Word, Void, Void> {

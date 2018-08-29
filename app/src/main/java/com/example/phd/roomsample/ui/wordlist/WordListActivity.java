@@ -37,7 +37,7 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     //endregion Declare Values
 
-    private void initViews(){
+    private void initViews() {
 
         //region Initialize Views
         recyclerView = findViewById(R.id.activity_main_rclv_word_list);
@@ -108,7 +108,10 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
             mDefinitions.append(definition.getDefinition()).append(" : ").append(definition.getLanguage()).append("\n");
         }
 
-        final Snackbar mSnackBar = createSnackBar(recyclerView.getRootView(), mDefinitions.toString(), Snackbar.LENGTH_INDEFINITE);
+        final Snackbar mSnackBar = createSnackBar(
+                recyclerView.getRootView(),
+                !mDefinitions.toString().equals("") ? mDefinitions.toString() : "There is still no Definition here!",
+                Snackbar.LENGTH_LONG);
         mSnackBar.setAction("OK", new View.OnClickListener() {
             @Override
             public void onClick(View view) {
