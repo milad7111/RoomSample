@@ -1,4 +1,4 @@
-package com.example.phd.roomsample.Ui.WordList;
+package com.example.phd.roomsample.ui.wordlist;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
@@ -6,9 +6,9 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
-import com.example.phd.roomsample.Models.WordViewModel;
-import com.example.phd.roomsample.Room.Tables.Definition;
-import com.example.phd.roomsample.Room.Tables.Word;
+import com.example.phd.roomsample.models.WordViewModel;
+import com.example.phd.roomsample.room.tables.Definition;
+import com.example.phd.roomsample.room.tables.Word;
 
 import java.util.List;
 

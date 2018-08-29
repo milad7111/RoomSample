@@ -1,4 +1,4 @@
-package com.example.phd.roomsample.Ui.WordList;
+package com.example.phd.roomsample.ui.wordlist;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -9,15 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 
-import com.example.phd.roomsample.Base.BaseActivity;
 import com.example.phd.roomsample.R;
-import com.example.phd.roomsample.Room.Tables.Definition;
-import com.example.phd.roomsample.Room.Tables.Word;
-import com.example.phd.roomsample.Ui.Word.NewWordActivity;
+import com.example.phd.roomsample.base.BaseActivity;
+import com.example.phd.roomsample.room.tables.Definition;
+import com.example.phd.roomsample.room.tables.Word;
+import com.example.phd.roomsample.ui.word.NewWordActivity;
 
 import java.util.List;
 
-import static com.example.phd.roomsample.Utils.ViewHelper.createSnackBar;
+import static com.example.phd.roomsample.utils.ViewHelper.createSnackBar;
 
 /**
  * Displays WordList View
@@ -37,6 +37,17 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
     //endregion Declare Values
 
+    private void initViews(){
+
+        //region Initialize Views
+        recyclerView = findViewById(R.id.activity_main_rclv_word_list);
+        //endregion Initialize Views
+
+        //region Set Events
+        findViewById(R.id.activity_main_fab_add_word).setOnClickListener(this);
+        //endregion Set Events
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,21 +58,17 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
         mWordListPresenter.getAllWords();
         //endregion Initialize Presenter
 
-        //region Initialize Views
-        recyclerView = findViewById(R.id.activity_main_rclv_word_list);
+        initViews();
 
-        mWordListAdapter = new WordListAdapter(this, mWordListPresenter);
+        //region Initialize Adapter
+        mWordListAdapter = new WordListAdapter(this);
         recyclerView.setAdapter(mWordListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ItemTouchHelper.Callback callback = new WordListTouchHelper(mWordListAdapter);
-        ItemTouchHelper helper = new ItemTouchHelper(callback);
-        helper.attachToRecyclerView(recyclerView);
-        //endregion Initialize Views
-
-        //region Set Events
-        findViewById(R.id.activity_main_fab_add_word).setOnClickListener(this);
-        //endregion Set Events
+        ItemTouchHelper.Callback mCallback = new WordListTouchHelper(mWordListAdapter);
+        ItemTouchHelper mHelper = new ItemTouchHelper(mCallback);
+        mHelper.attachToRecyclerView(recyclerView);
+        //endregion Initialize Adapter
     }
 
     @SuppressLint("DefaultLocale")
@@ -108,5 +115,15 @@ public class WordListActivity extends BaseActivity implements WordListContract.M
                 mSnackBar.dismiss();
             }
         }).show();
+    }
+
+    @Override
+    public void deleteWord(Word _mWord) {
+        mWordListPresenter.deleteWord(_mWord);
+    }
+
+    @Override
+    public void getDefinitionsByWord(Word _mWord) {
+        mWordListPresenter.getDefinitionsByWord(_mWord);
     }
 }

@@ -1,18 +1,17 @@
-package com.example.phd.roomsample.Room._Main;
+package com.example.phd.roomsample.room._main;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.migration.Migration;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.example.phd.roomsample.Room.Daos.DefinitionDao;
-import com.example.phd.roomsample.Room.Daos.WordDao;
-import com.example.phd.roomsample.Room.Tables.Definition;
-import com.example.phd.roomsample.Room.Tables.Word;
+import com.example.phd.roomsample.room.daos.DefinitionDao;
+import com.example.phd.roomsample.room.daos.WordDao;
+import com.example.phd.roomsample.room.tables.Definition;
+import com.example.phd.roomsample.room.tables.Word;
 
 @Database(entities = {Word.class, Definition.class}, version = 1, exportSchema = false)
 public abstract class WordRoomDatabase extends RoomDatabase {

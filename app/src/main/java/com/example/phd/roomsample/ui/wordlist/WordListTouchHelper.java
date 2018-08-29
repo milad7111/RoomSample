@@ -1,4 +1,4 @@
-package com.example.phd.roomsample.Ui.WordList;
+package com.example.phd.roomsample.ui.wordlist;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -6,7 +6,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 public class WordListTouchHelper extends ItemTouchHelper.SimpleCallback {
     private WordListAdapter mWordListAdapter;
 
-    public WordListTouchHelper(WordListAdapter _mWordListAdapter) {
+    WordListTouchHelper(WordListAdapter _mWordListAdapter) {
         super(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT);
         this.mWordListAdapter = _mWordListAdapter;
     }

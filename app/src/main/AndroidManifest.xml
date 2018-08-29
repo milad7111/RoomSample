@@ -3,7 +3,7 @@
     package="com.example.phd.roomsample">
 
     <application
-        android:name=".Base.BaseApplication"
+        android:name=".base.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Ui.WordList.WordListActivity"
+            android:name=".ui.wordlist.WordListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Ui.Word.NewWordActivity" />
-        <activity android:name=".Base.BaseActivity"></activity>
+        <activity android:name=".ui.word.NewWordActivity" />
+        <activity android:name=".base.BaseActivity"></activity>
     </application>
 
 </manifest>

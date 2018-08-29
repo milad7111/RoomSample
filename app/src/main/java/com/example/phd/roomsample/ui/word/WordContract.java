@@ -1,6 +1,6 @@
-package com.example.phd.roomsample.Ui.Word;
+package com.example.phd.roomsample.ui.word;
 
-import com.example.phd.roomsample.Room.Tables.Word;
+import com.example.phd.roomsample.room.tables.Word;
 
 /**
  * Defines the contract between the View {@link NewWordActivity} and the Presenter {@link NewWordPresenter}

@@ -1,12 +1,12 @@
-package com.example.phd.roomsample.Models;
+package com.example.phd.roomsample.models;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 
-import com.example.phd.roomsample.Repositories.WordRepository;
-import com.example.phd.roomsample.Room.Tables.Definition;
-import com.example.phd.roomsample.Room.Tables.Word;
+import com.example.phd.roomsample.repositories.WordRepository;
+import com.example.phd.roomsample.room.tables.Definition;
+import com.example.phd.roomsample.room.tables.Word;
 
 import java.util.List;
 
@@ -17,20 +17,17 @@ public class WordViewModel extends AndroidViewModel {
     //endregion Declare Objects
 
     //region Declare Values
-    private LiveData<List<Word>> mAllWords;
-    private LiveData<List<Definition>> mAllDefinitions;
     //endregion Declare Values
 
     public WordViewModel(Application application) {
         super(application);
+
         mRepository = new WordRepository(application);
-        mAllWords = mRepository.getAllWords();
-        mAllDefinitions = mRepository.getAllDefinitions();
     }
 
     //region Word table
     public LiveData<List<Word>> getAllWords() {
-        return mAllWords;
+        return mRepository.getAllWords();
     }
 
     public void insertWord(Word word) {
@@ -44,7 +41,7 @@ public class WordViewModel extends AndroidViewModel {
 
     //region Definition table
     public LiveData<List<Definition>> getAllDefinitions() {
-        return mAllDefinitions;
+        return mRepository.getAllDefinitions();
     }
 
     public void insertDefinition(Definition definition) {

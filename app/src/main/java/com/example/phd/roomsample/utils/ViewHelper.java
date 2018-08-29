@@ -1,4 +1,4 @@
-package com.example.phd.roomsample.Utils;
+package com.example.phd.roomsample.utils;
 
 import android.support.design.widget.Snackbar;
 import android.view.Gravity;

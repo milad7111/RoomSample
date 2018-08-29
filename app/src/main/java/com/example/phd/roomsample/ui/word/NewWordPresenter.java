@@ -1,10 +1,10 @@
-package com.example.phd.roomsample.Ui.Word;
+package com.example.phd.roomsample.ui.word;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v4.app.FragmentActivity;
 
-import com.example.phd.roomsample.Models.WordViewModel;
-import com.example.phd.roomsample.Room.Tables.Word;
+import com.example.phd.roomsample.models.WordViewModel;
+import com.example.phd.roomsample.room.tables.Word;
 
 /**
  * Prepares data and Notify View

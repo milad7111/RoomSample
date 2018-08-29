@@ -1,4 +1,4 @@
-package com.example.phd.roomsample.Ui.Word;
+package com.example.phd.roomsample.ui.word;
 
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
@@ -7,11 +7,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 
-import com.example.phd.roomsample.Base.BaseActivity;
+import com.example.phd.roomsample.base.BaseActivity;
 import com.example.phd.roomsample.R;
-import com.example.phd.roomsample.Room.Tables.Word;
+import com.example.phd.roomsample.room.tables.Word;
 
-import static com.example.phd.roomsample.Utils.ViewHelper.createSnackBar;
+import static com.example.phd.roomsample.utils.ViewHelper.createSnackBar;
 
 public class NewWordActivity extends BaseActivity implements WordContract.MvpView, View.OnClickListener {
 
@@ -20,13 +20,24 @@ public class NewWordActivity extends BaseActivity implements WordContract.MvpVie
     //endregion Declare Objects
 
     //region Declare Views
-    private EditText _activity_new_word_edtx_word;
+    private EditText etNewWord;
     //endregion Declare Views
 
     //region Declare Values
     public static final String EXTRA_REPLY = "countOfAddedWords";
     private int mCount;
     //endregion Declare Values
+
+    private void initViews(){
+
+        //region Initialize Views
+        etNewWord = findViewById(R.id.activity_new_word_edtx_word);
+        //endregion Initialize Views
+
+        //region Set Events
+        findViewById(R.id.activity_new_word_btn_save).setOnClickListener(this);
+        //endregion Set Events
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,29 +48,21 @@ public class NewWordActivity extends BaseActivity implements WordContract.MvpVie
         mWordPresenter = new NewWordPresenter(this);
         //endregion Initialize Presenter
 
-        //region Initialize Views
-        _activity_new_word_edtx_word = findViewById(R.id.activity_new_word_edtx_word);
-        //endregion Initialize Views
-
         //region Initialize Values
         mCount = 0;
         //endregion Initialize Values
 
-        //region Set Events
-        findViewById(R.id.activity_new_word_btn_save).setOnClickListener(this);
-        //endregion Set Events
+        initViews();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.activity_new_word_btn_save:
-                if (TextUtils.isEmpty(_activity_new_word_edtx_word.getText())) {
+                if (TextUtils.isEmpty(etNewWord.getText())) {
                     checkResponse(0);
                 } else {
-                    mWordPresenter.insertWord(new Word(_activity_new_word_edtx_word.getText().toString()));
-                    _activity_new_word_edtx_word.setText(null);
-                    mCount++;
+                    mWordPresenter.insertWord(new Word(etNewWord.getText().toString()));
                 }
                 break;
         }
@@ -69,10 +72,12 @@ public class NewWordActivity extends BaseActivity implements WordContract.MvpVie
     public void checkResponse(int _responseCode) {
         switch (_responseCode) {
             case 0:
-                createSnackBar(_activity_new_word_edtx_word, getString(R.string.empty_not_saved), Snackbar.LENGTH_LONG).show();
+                createSnackBar(etNewWord, getString(R.string.empty_not_saved), Snackbar.LENGTH_LONG).show();
                 break;
             case 1:
-                createSnackBar(_activity_new_word_edtx_word, getString(R.string.word_added), Snackbar.LENGTH_SHORT).show();
+                etNewWord.setText(null);
+                mCount++;
+                createSnackBar(etNewWord, getString(R.string.word_added), Snackbar.LENGTH_SHORT).show();
                 break;
         }
     }

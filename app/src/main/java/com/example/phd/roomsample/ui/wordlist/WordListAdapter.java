@@ -1,25 +1,21 @@
-package com.example.phd.roomsample.Ui.WordList;
+package com.example.phd.roomsample.ui.wordlist;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.phd.roomsample.R;
-import com.example.phd.roomsample.Room.Tables.Word;
+import com.example.phd.roomsample.room.tables.Word;
 
 import java.util.List;
 
 public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordViewHolder> {
 
     //region Declare Objects
-    private WordListPresenter mWordListPresenter;
+    private WordListContract.MvpView mMvpView;
     //endregion Declare Objects
 
     //region Declare Views
@@ -39,9 +35,9 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         }
     }
 
-    WordListAdapter(Context _mContext, WordListPresenter _mWordListPresenter) {
-        this.mInflater = LayoutInflater.from(_mContext);
-        this.mWordListPresenter = _mWordListPresenter;
+    WordListAdapter(WordListContract.MvpView _mMvpView) {
+        this.mInflater = LayoutInflater.from((Context) _mMvpView);
+        this.mMvpView = _mMvpView;
     }
 
     @Override
@@ -63,7 +59,7 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mWordListPresenter.getDefinitionsByWord(mWords.get(position));
+                mMvpView.getDefinitionsByWord(mWords.get(position));
             }
         });
     }
@@ -83,6 +79,6 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     }
 
     public void remove(int position) {
-        mWordListPresenter.deleteWord(mWords.get(position));
+        mMvpView.deleteWord(mWords.get(position));
     }
 }
